@@ -582,7 +582,7 @@
                                 },
                                 "host": {
                                     "connection": {
-                                        "name": "@parameters('$connections')['servicebus']['connectionId']"
+                                        "name": "/subscriptions/50ee4f3b-7b0b-4751-add6-d43210dc013b/providers/Microsoft.Web/locations/eastus/managedApis/servicebus"
                                     }
                                 },
                                 "method": "post",
