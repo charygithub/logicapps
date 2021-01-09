@@ -1,17 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "parameters": {
-        "$connections": {
-            "value": {
-                "servicebus": {
-                    "connectionId": "/subscriptions/50ee4f3b-7b0b-4751-add6-d43210dc013b/resourceGroups/logicapps-rg/providers/Microsoft.Web/connections/servicebus",
-                    "connectionName": "servicebus",
-                    "id": "/subscriptions/50ee4f3b-7b0b-4751-add6-d43210dc013b/providers/Microsoft.Web/locations/eastus/managedApis/servicebus"
-                }
-            }
-        }
-    },
   "resources": [
     {
       "type": "Microsoft.Logic/workflows",
