@@ -23,606 +23,609 @@
       },
       "properties": {
         "definition": {
-          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-          "contentVersion": "1.0.0.0",
-          "outputs": {},
-		  "actions": {
-            "Condition": {
-                "actions": {
-                    "Response_2": {
-                        "inputs": {
-                            "body": "Purchase Order successfully received and queued for processing.",
-                            "statusCode": 200
-                        },
-                        "kind": "Http",
-                        "runAfter": {
-                            "Send_message": [
-                                "Succeeded"
-                            ]
-                        },
-                        "type": "Response"
-                    },
-                    "Send_message": {
-                        "inputs": {
-                            "body": {
-                                "ContentData": "@{base64(triggerBody())}"
-                            },
-                            "host": {
-                                "connection": {
-                                    "name": "@parameters('$connections')['servicebus']['connectionId']"
+         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "$connections": {
+                    "defaultValue": {},
+                    "type": "Object"
+                }
+            },
+            "triggers": {
+                "manual": {
+                    "type": "Request",
+                    "kind": "Http",
+                    "inputs": {
+                        "method": "POST",
+                        "schema": {
+                            "properties": {
+                                "SuppProcessStatus": {
+                                    "type": "string"
+                                },
+                                "groupDiscount": {
+                                    "type": "integer"
+                                },
+                                "incoterms": {
+                                    "type": "string"
+                                },
+                                "label_id": {
+                                    "type": "integer"
+                                },
+                                "mAmount": {
+                                    "type": "integer"
+                                },
+                                "mApproverId": {
+                                    "type": "integer"
+                                },
+                                "mCcyPair": {
+                                    "type": "string"
+                                },
+                                "mCurrency": {
+                                    "type": "string"
+                                },
+                                "mDefaultRowsNumber": {
+                                    "type": "integer"
+                                },
+                                "mDescription": {
+                                    "type": "string"
+                                },
+                                "mEntityAdd1": {
+                                    "type": "string"
+                                },
+                                "mEntityAdd2": {
+                                    "type": "string"
+                                },
+                                "mEntityAdd3": {
+                                    "type": "string"
+                                },
+                                "mEntityContactPerson": {
+                                    "type": "string"
+                                },
+                                "mEntityCountry": {
+                                    "type": "string"
+                                },
+                                "mEntityEmail": {
+                                    "type": "string"
+                                },
+                                "mEntityFax": {
+                                    "type": "string"
+                                },
+                                "mEntityKey": {
+                                    "type": "integer"
+                                },
+                                "mEntityName": {
+                                    "type": "string"
+                                },
+                                "mEntityPostcode": {
+                                    "type": "string"
+                                },
+                                "mEntityState": {
+                                    "type": "string"
+                                },
+                                "mEntityTable": {
+                                    "type": "string"
+                                },
+                                "mEntityTelephone": {
+                                    "type": "string"
+                                },
+                                "mEntityType": {
+                                    "type": "string"
+                                },
+                                "mForeignKey": {
+                                    "type": "integer"
+                                },
+                                "mForeignTable": {
+                                    "type": "string"
+                                },
+                                "mGuid": {
+                                    "type": "string"
+                                },
+                                "mIdentityNumber": {
+                                    "type": "string"
+                                },
+                                "mLastUpdate": {
+                                    "type": "string"
+                                },
+                                "mLocationId": {
+                                    "type": "integer"
+                                },
+                                "mOrderType": {
+                                    "type": "string"
+                                },
+                                "mPCCenter": {
+                                    "type": "integer"
+                                },
+                                "mPkid": {
+                                    "type": "integer"
+                                },
+                                "mPosPkid": {
+                                    "type": "integer"
+                                },
+                                "mProperty1": {
+                                    "type": "string"
+                                },
+                                "mProperty2": {
+                                    "type": "string"
+                                },
+                                "mPurchaseTxnId": {
+                                    "type": "integer"
+                                },
+                                "mReferenceNo": {
+                                    "type": "string"
+                                },
+                                "mRemarks": {
+                                    "type": "string"
+                                },
+                                "mRequestorId": {
+                                    "type": "integer"
+                                },
+                                "mShipTo": {
+                                    "type": "string"
+                                },
+                                "mState": {
+                                    "type": "string"
+                                },
+                                "mStatus": {
+                                    "type": "string"
+                                },
+                                "mStmtNumber": {
+                                    "type": "integer"
+                                },
+                                "mStmtType": {
+                                    "type": "string"
+                                },
+                                "mSuppProcCtrId": {
+                                    "type": "integer"
+                                },
+                                "mTermsDate": {
+                                    "type": "string"
+                                },
+                                "mTimeComplete": {
+                                    "type": "string"
+                                },
+                                "mTimeCreated": {
+                                    "type": "string"
+                                },
+                                "mTxnType": {
+                                    "type": "string"
+                                },
+                                "mUserIdUpdate": {
+                                    "type": "integer"
+                                },
+                                "mXRate": {
+                                    "type": "integer"
+                                },
+                                "permitDoc1": {
+                                    "type": "string"
+                                },
+                                "permitDoc2": {
+                                    "type": "string"
+                                },
+                                "permitDoc3": {
+                                    "type": "string"
+                                },
+                                "permitNo": {
+                                    "type": "string"
+                                },
+                                "remarks2": {
+                                    "type": "string"
+                                },
+                                "requestedDate": {
+                                    "type": "string"
+                                },
+                                "tax_id": {
+                                    "type": "string"
+                                },
+                                "tradersRemarks": {
+                                    "type": "string"
+                                },
+                                "transportDate": {
+                                    "type": "string"
+                                },
+                                "transportDoc1": {
+                                    "type": "string"
+                                },
+                                "transportDoc2": {
+                                    "type": "string"
+                                },
+                                "transportDoc3": {
+                                    "type": "string"
+                                },
+                                "txnDoc1": {
+                                    "type": "string"
+                                },
+                                "txnDoc2": {
+                                    "type": "string"
+                                },
+                                "txnDoc3": {
+                                    "type": "string"
+                                },
+                                "vecPurchaseOrderItems": {
+                                    "items": {
+                                        "properties": {
+                                            "codeDepartment": {
+                                                "type": "string"
+                                            },
+                                            "codeProject": {
+                                                "type": "string"
+                                            },
+                                            "colSerial": {
+                                                "type": "array"
+                                            },
+                                            "colSerialObj": {
+                                                "type": "array"
+                                            },
+                                            "date_expected_delivery": {
+                                                "type": "string"
+                                            },
+                                            "label_id": {
+                                                "type": "integer"
+                                            },
+                                            "mBarCode": {
+                                                "type": "string"
+                                            },
+                                            "mBomId": {
+                                                "type": "integer"
+                                            },
+                                            "mCurrency": {
+                                                "type": "string"
+                                            },
+                                            "mCurrency2": {
+                                                "type": "string"
+                                            },
+                                            "mDescription1": {
+                                                "type": "string"
+                                            },
+                                            "mDescription2": {
+                                                "type": "string"
+                                            },
+                                            "mFifoUnitCost": {
+                                                "type": "integer"
+                                            },
+                                            "mGuid": {
+                                                "type": "string"
+                                            },
+                                            "mImage": {
+                                                "type": "integer"
+                                            },
+                                            "mIndexGuid": {
+                                                "type": "string"
+                                            },
+                                            "mItemId": {
+                                                "type": "integer"
+                                            },
+                                            "mLastUnitCost": {
+                                                "type": "integer"
+                                            },
+                                            "mMaUnitCost": {
+                                                "type": "integer"
+                                            },
+                                            "mName": {
+                                                "type": "string"
+                                            },
+                                            "mOutstandingQty": {
+                                                "type": "integer"
+                                            },
+                                            "mPackageGroup": {
+                                                "type": "string"
+                                            },
+                                            "mPkid": {
+                                                "type": "integer"
+                                            },
+                                            "mPriceDisc1": {
+                                                "type": "integer"
+                                            },
+                                            "mPriceDisc2": {
+                                                "type": "integer"
+                                            },
+                                            "mPriceDisc3": {
+                                                "type": "integer"
+                                            },
+                                            "mPriceList": {
+                                                "type": "integer"
+                                            },
+                                            "mPriceMin": {
+                                                "type": "integer"
+                                            },
+                                            "mPriceSale": {
+                                                "type": "integer"
+                                            },
+                                            "mPurchaseItemId": {
+                                                "type": "integer"
+                                            },
+                                            "mPurchaseItemType": {
+                                                "type": "string"
+                                            },
+                                            "mPurchaseOrderId": {
+                                                "type": "integer"
+                                            },
+                                            "mReceivingPrice": {
+                                                "type": "integer"
+                                            },
+                                            "mReceivingQty": {
+                                                "type": "integer"
+                                            },
+                                            "mReceivingRemarks": {
+                                                "type": "string"
+                                            },
+                                            "mReceivingStatus": {
+                                                "type": "string"
+                                            },
+                                            "mRemarks": {
+                                                "type": "string"
+                                            },
+                                            "mReplacementCost": {
+                                                "type": "integer"
+                                            },
+                                            "mSerialized": {
+                                                "type": "boolean"
+                                            },
+                                            "mStatus": {
+                                                "type": "string"
+                                            },
+                                            "mStkCode": {
+                                                "type": "string"
+                                            },
+                                            "mStockReqId": {
+                                                "type": "integer"
+                                            },
+                                            "mTotalQty": {
+                                                "type": "integer"
+                                            },
+                                            "mUnitPriceQuoted": {
+                                                "type": "integer"
+                                            },
+                                            "mUnitPriceQuoted2": {
+                                                "type": "integer"
+                                            },
+                                            "mUnitPriceQuoted3": {
+                                                "type": "integer"
+                                            },
+                                            "mUnitPriceRecommended": {
+                                                "type": "integer"
+                                            },
+                                            "mUnitPriceRecommended2": {
+                                                "type": "integer"
+                                            },
+                                            "mWaUnitCost": {
+                                                "type": "integer"
+                                            },
+                                            "remoteStatus": {
+                                                "type": "string"
+                                            },
+                                            "taxAmt": {
+                                                "type": "integer"
+                                            },
+                                            "taxAmt2": {
+                                                "type": "integer"
+                                            },
+                                            "taxCode": {
+                                                "type": "string"
+                                            },
+                                            "taxOption": {
+                                                "type": "string"
+                                            },
+                                            "taxRate": {
+                                                "type": "integer"
+                                            },
+                                            "taxType": {
+                                                "type": "string"
+                                            },
+                                            "unitDiscount": {
+                                                "type": "integer"
+                                            },
+                                            "unitDiscount2": {
+                                                "type": "integer"
+                                            },
+                                            "uom": {
+                                                "type": "string"
+                                            },
+                                            "uomRatio": {
+                                                "type": "integer"
+                                            },
+                                            "vecDiscountElement": {
+                                                "type": "array"
+                                            },
+                                            "vecLabels": {
+                                                "type": "array"
+                                            },
+                                            "vecSerialNumberDelta": {
+                                                "type": "array"
+                                            },
+                                            "whtFilingCycle": {
+                                                "type": "string"
+                                            },
+                                            "whtFilingDate": {
+                                                "type": "string"
+                                            },
+                                            "whtTaxAmount": {
+                                                "type": "integer"
+                                            },
+                                            "whtTaxBalance": {
+                                                "type": "integer"
+                                            },
+                                            "whtTaxCode": {
+                                                "type": "string"
+                                            },
+                                            "whtTaxRate": {
+                                                "type": "integer"
+                                            },
+                                            "whtTaxType": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "mPkid",
+                                            "mGuid",
+                                            "mIndexGuid",
+                                            "mPurchaseOrderId",
+                                            "mPurchaseItemId",
+                                            "mRemarks",
+                                            "mTotalQty",
+                                            "mCurrency",
+                                            "mUnitPriceRecommended",
+                                            "mUnitPriceQuoted",
+                                            "mStatus",
+                                            "mPurchaseItemType",
+                                            "mItemId",
+                                            "mStkCode",
+                                            "mBarCode",
+                                            "mSerialized",
+                                            "mName",
+                                            "mOutstandingQty",
+                                            "mPriceList",
+                                            "mPriceSale",
+                                            "mPriceDisc1",
+                                            "mPriceDisc2",
+                                            "mPriceDisc3",
+                                            "mPriceMin",
+                                            "mFifoUnitCost",
+                                            "mMaUnitCost",
+                                            "mWaUnitCost",
+                                            "mLastUnitCost",
+                                            "mReplacementCost",
+                                            "mReceivingPrice",
+                                            "mReceivingStatus",
+                                            "mReceivingQty",
+                                            "mReceivingRemarks",
+                                            "colSerial",
+                                            "colSerialObj",
+                                            "mDescription1",
+                                            "mDescription2",
+                                            "mUnitPriceQuoted3",
+                                            "mImage",
+                                            "whtTaxType",
+                                            "whtTaxCode",
+                                            "whtTaxRate",
+                                            "whtTaxAmount",
+                                            "whtTaxBalance",
+                                            "whtFilingDate",
+                                            "whtFilingCycle",
+                                            "vecSerialNumberDelta",
+                                            "mBomId",
+                                            "mPackageGroup",
+                                            "mCurrency2",
+                                            "mUnitPriceQuoted2",
+                                            "mStockReqId",
+                                            "taxCode",
+                                            "taxType",
+                                            "taxRate",
+                                            "taxAmt",
+                                            "taxAmt2",
+                                            "mUnitPriceRecommended2",
+                                            "taxOption",
+                                            "uom",
+                                            "uomRatio",
+                                            "date_expected_delivery",
+                                            "codeProject",
+                                            "codeDepartment",
+                                            "vecLabels",
+                                            "label_id",
+                                            "remoteStatus",
+                                            "unitDiscount",
+                                            "unitDiscount2",
+                                            "vecDiscountElement"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "whtFilingCycle": {
+                                    "type": "string"
+                                },
+                                "whtFilingDate": {
+                                    "type": "string"
+                                },
+                                "whtTaxAmount": {
+                                    "type": "integer"
+                                },
+                                "whtTaxBalance": {
+                                    "type": "integer"
+                                },
+                                "whtTaxCode": {
+                                    "type": "string"
+                                },
+                                "whtTaxRate": {
+                                    "type": "integer"
+                                },
+                                "whtTaxType": {
+                                    "type": "string"
                                 }
                             },
-                            "method": "post",
-                            "path": "/@{encodeURIComponent(encodeURIComponent('orders'))}/messages",
-                            "queries": {
-                                "systemProperties": "None"
-                            }
-                        },
-                        "runAfter": {},
-                        "type": "ApiConnection"
+                            "type": "object"
+                        }
                     }
-                },
-                "else": {
+                }
+            },
+            "actions": {
+                "Condition": {
                     "actions": {
-                        "Response": {
-                            "inputs": {
-                                "body": "Invalid Order: mApproverId=@{triggerBody()?['mApproverId']}",
-                                "headers": {
-                                    "Content-Type": "application/json"
-                                },
-                                "statusCode": 200
+                        "Response_2": {
+                            "runAfter": {
+                                "Send_message": [
+                                    "Succeeded"
+                                ]
                             },
+                            "type": "Response",
                             "kind": "Http",
-                            "runAfter": {},
-                            "type": "Response"
-                        }
-                    }
-                },
-                "expression": {
-                    "and": [
-                        {
-                            "equals": [
-                                "@triggerBody()?['mApproverId']",
-                                500
-                            ]
-                        }
-                    ]
-                },
-                "runAfter": {},
-                "type": "If"
-            }
-        },
-          "triggers": {
-            "manual": {
-                "inputs": {
-                    "method": "POST",
-                    "schema": {
-                        "properties": {
-                            "SuppProcessStatus": {
-                                "type": "string"
-                            },
-                            "groupDiscount": {
-                                "type": "integer"
-                            },
-                            "incoterms": {
-                                "type": "string"
-                            },
-                            "label_id": {
-                                "type": "integer"
-                            },
-                            "mAmount": {
-                                "type": "integer"
-                            },
-                            "mApproverId": {
-                                "type": "integer"
-                            },
-                            "mCcyPair": {
-                                "type": "string"
-                            },
-                            "mCurrency": {
-                                "type": "string"
-                            },
-                            "mDefaultRowsNumber": {
-                                "type": "integer"
-                            },
-                            "mDescription": {
-                                "type": "string"
-                            },
-                            "mEntityAdd1": {
-                                "type": "string"
-                            },
-                            "mEntityAdd2": {
-                                "type": "string"
-                            },
-                            "mEntityAdd3": {
-                                "type": "string"
-                            },
-                            "mEntityContactPerson": {
-                                "type": "string"
-                            },
-                            "mEntityCountry": {
-                                "type": "string"
-                            },
-                            "mEntityEmail": {
-                                "type": "string"
-                            },
-                            "mEntityFax": {
-                                "type": "string"
-                            },
-                            "mEntityKey": {
-                                "type": "integer"
-                            },
-                            "mEntityName": {
-                                "type": "string"
-                            },
-                            "mEntityPostcode": {
-                                "type": "string"
-                            },
-                            "mEntityState": {
-                                "type": "string"
-                            },
-                            "mEntityTable": {
-                                "type": "string"
-                            },
-                            "mEntityTelephone": {
-                                "type": "string"
-                            },
-                            "mEntityType": {
-                                "type": "string"
-                            },
-                            "mForeignKey": {
-                                "type": "integer"
-                            },
-                            "mForeignTable": {
-                                "type": "string"
-                            },
-                            "mGuid": {
-                                "type": "string"
-                            },
-                            "mIdentityNumber": {
-                                "type": "string"
-                            },
-                            "mLastUpdate": {
-                                "type": "string"
-                            },
-                            "mLocationId": {
-                                "type": "integer"
-                            },
-                            "mOrderType": {
-                                "type": "string"
-                            },
-                            "mPCCenter": {
-                                "type": "integer"
-                            },
-                            "mPkid": {
-                                "type": "integer"
-                            },
-                            "mPosPkid": {
-                                "type": "integer"
-                            },
-                            "mProperty1": {
-                                "type": "string"
-                            },
-                            "mProperty2": {
-                                "type": "string"
-                            },
-                            "mPurchaseTxnId": {
-                                "type": "integer"
-                            },
-                            "mReferenceNo": {
-                                "type": "string"
-                            },
-                            "mRemarks": {
-                                "type": "string"
-                            },
-                            "mRequestorId": {
-                                "type": "integer"
-                            },
-                            "mShipTo": {
-                                "type": "string"
-                            },
-                            "mState": {
-                                "type": "string"
-                            },
-                            "mStatus": {
-                                "type": "string"
-                            },
-                            "mStmtNumber": {
-                                "type": "integer"
-                            },
-                            "mStmtType": {
-                                "type": "string"
-                            },
-                            "mSuppProcCtrId": {
-                                "type": "integer"
-                            },
-                            "mTermsDate": {
-                                "type": "string"
-                            },
-                            "mTimeComplete": {
-                                "type": "string"
-                            },
-                            "mTimeCreated": {
-                                "type": "string"
-                            },
-                            "mTxnType": {
-                                "type": "string"
-                            },
-                            "mUserIdUpdate": {
-                                "type": "integer"
-                            },
-                            "mXRate": {
-                                "type": "integer"
-                            },
-                            "permitDoc1": {
-                                "type": "string"
-                            },
-                            "permitDoc2": {
-                                "type": "string"
-                            },
-                            "permitDoc3": {
-                                "type": "string"
-                            },
-                            "permitNo": {
-                                "type": "string"
-                            },
-                            "remarks2": {
-                                "type": "string"
-                            },
-                            "requestedDate": {
-                                "type": "string"
-                            },
-                            "tax_id": {
-                                "type": "string"
-                            },
-                            "tradersRemarks": {
-                                "type": "string"
-                            },
-                            "transportDate": {
-                                "type": "string"
-                            },
-                            "transportDoc1": {
-                                "type": "string"
-                            },
-                            "transportDoc2": {
-                                "type": "string"
-                            },
-                            "transportDoc3": {
-                                "type": "string"
-                            },
-                            "txnDoc1": {
-                                "type": "string"
-                            },
-                            "txnDoc2": {
-                                "type": "string"
-                            },
-                            "txnDoc3": {
-                                "type": "string"
-                            },
-                            "vecPurchaseOrderItems": {
-                                "items": {
-                                    "properties": {
-                                        "codeDepartment": {
-                                            "type": "string"
-                                        },
-                                        "codeProject": {
-                                            "type": "string"
-                                        },
-                                        "colSerial": {
-                                            "type": "array"
-                                        },
-                                        "colSerialObj": {
-                                            "type": "array"
-                                        },
-                                        "date_expected_delivery": {
-                                            "type": "string"
-                                        },
-                                        "label_id": {
-                                            "type": "integer"
-                                        },
-                                        "mBarCode": {
-                                            "type": "string"
-                                        },
-                                        "mBomId": {
-                                            "type": "integer"
-                                        },
-                                        "mCurrency": {
-                                            "type": "string"
-                                        },
-                                        "mCurrency2": {
-                                            "type": "string"
-                                        },
-                                        "mDescription1": {
-                                            "type": "string"
-                                        },
-                                        "mDescription2": {
-                                            "type": "string"
-                                        },
-                                        "mFifoUnitCost": {
-                                            "type": "integer"
-                                        },
-                                        "mGuid": {
-                                            "type": "string"
-                                        },
-                                        "mImage": {
-                                            "type": "integer"
-                                        },
-                                        "mIndexGuid": {
-                                            "type": "string"
-                                        },
-                                        "mItemId": {
-                                            "type": "integer"
-                                        },
-                                        "mLastUnitCost": {
-                                            "type": "integer"
-                                        },
-                                        "mMaUnitCost": {
-                                            "type": "integer"
-                                        },
-                                        "mName": {
-                                            "type": "string"
-                                        },
-                                        "mOutstandingQty": {
-                                            "type": "integer"
-                                        },
-                                        "mPackageGroup": {
-                                            "type": "string"
-                                        },
-                                        "mPkid": {
-                                            "type": "integer"
-                                        },
-                                        "mPriceDisc1": {
-                                            "type": "integer"
-                                        },
-                                        "mPriceDisc2": {
-                                            "type": "integer"
-                                        },
-                                        "mPriceDisc3": {
-                                            "type": "integer"
-                                        },
-                                        "mPriceList": {
-                                            "type": "integer"
-                                        },
-                                        "mPriceMin": {
-                                            "type": "integer"
-                                        },
-                                        "mPriceSale": {
-                                            "type": "integer"
-                                        },
-                                        "mPurchaseItemId": {
-                                            "type": "integer"
-                                        },
-                                        "mPurchaseItemType": {
-                                            "type": "string"
-                                        },
-                                        "mPurchaseOrderId": {
-                                            "type": "integer"
-                                        },
-                                        "mReceivingPrice": {
-                                            "type": "integer"
-                                        },
-                                        "mReceivingQty": {
-                                            "type": "integer"
-                                        },
-                                        "mReceivingRemarks": {
-                                            "type": "string"
-                                        },
-                                        "mReceivingStatus": {
-                                            "type": "string"
-                                        },
-                                        "mRemarks": {
-                                            "type": "string"
-                                        },
-                                        "mReplacementCost": {
-                                            "type": "integer"
-                                        },
-                                        "mSerialized": {
-                                            "type": "boolean"
-                                        },
-                                        "mStatus": {
-                                            "type": "string"
-                                        },
-                                        "mStkCode": {
-                                            "type": "string"
-                                        },
-                                        "mStockReqId": {
-                                            "type": "integer"
-                                        },
-                                        "mTotalQty": {
-                                            "type": "integer"
-                                        },
-                                        "mUnitPriceQuoted": {
-                                            "type": "integer"
-                                        },
-                                        "mUnitPriceQuoted2": {
-                                            "type": "integer"
-                                        },
-                                        "mUnitPriceQuoted3": {
-                                            "type": "integer"
-                                        },
-                                        "mUnitPriceRecommended": {
-                                            "type": "integer"
-                                        },
-                                        "mUnitPriceRecommended2": {
-                                            "type": "integer"
-                                        },
-                                        "mWaUnitCost": {
-                                            "type": "integer"
-                                        },
-                                        "remoteStatus": {
-                                            "type": "string"
-                                        },
-                                        "taxAmt": {
-                                            "type": "integer"
-                                        },
-                                        "taxAmt2": {
-                                            "type": "integer"
-                                        },
-                                        "taxCode": {
-                                            "type": "string"
-                                        },
-                                        "taxOption": {
-                                            "type": "string"
-                                        },
-                                        "taxRate": {
-                                            "type": "integer"
-                                        },
-                                        "taxType": {
-                                            "type": "string"
-                                        },
-                                        "unitDiscount": {
-                                            "type": "integer"
-                                        },
-                                        "unitDiscount2": {
-                                            "type": "integer"
-                                        },
-                                        "uom": {
-                                            "type": "string"
-                                        },
-                                        "uomRatio": {
-                                            "type": "integer"
-                                        },
-                                        "vecDiscountElement": {
-                                            "type": "array"
-                                        },
-                                        "vecLabels": {
-                                            "type": "array"
-                                        },
-                                        "vecSerialNumberDelta": {
-                                            "type": "array"
-                                        },
-                                        "whtFilingCycle": {
-                                            "type": "string"
-                                        },
-                                        "whtFilingDate": {
-                                            "type": "string"
-                                        },
-                                        "whtTaxAmount": {
-                                            "type": "integer"
-                                        },
-                                        "whtTaxBalance": {
-                                            "type": "integer"
-                                        },
-                                        "whtTaxCode": {
-                                            "type": "string"
-                                        },
-                                        "whtTaxRate": {
-                                            "type": "integer"
-                                        },
-                                        "whtTaxType": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "mPkid",
-                                        "mGuid",
-                                        "mIndexGuid",
-                                        "mPurchaseOrderId",
-                                        "mPurchaseItemId",
-                                        "mRemarks",
-                                        "mTotalQty",
-                                        "mCurrency",
-                                        "mUnitPriceRecommended",
-                                        "mUnitPriceQuoted",
-                                        "mStatus",
-                                        "mPurchaseItemType",
-                                        "mItemId",
-                                        "mStkCode",
-                                        "mBarCode",
-                                        "mSerialized",
-                                        "mName",
-                                        "mOutstandingQty",
-                                        "mPriceList",
-                                        "mPriceSale",
-                                        "mPriceDisc1",
-                                        "mPriceDisc2",
-                                        "mPriceDisc3",
-                                        "mPriceMin",
-                                        "mFifoUnitCost",
-                                        "mMaUnitCost",
-                                        "mWaUnitCost",
-                                        "mLastUnitCost",
-                                        "mReplacementCost",
-                                        "mReceivingPrice",
-                                        "mReceivingStatus",
-                                        "mReceivingQty",
-                                        "mReceivingRemarks",
-                                        "colSerial",
-                                        "colSerialObj",
-                                        "mDescription1",
-                                        "mDescription2",
-                                        "mUnitPriceQuoted3",
-                                        "mImage",
-                                        "whtTaxType",
-                                        "whtTaxCode",
-                                        "whtTaxRate",
-                                        "whtTaxAmount",
-                                        "whtTaxBalance",
-                                        "whtFilingDate",
-                                        "whtFilingCycle",
-                                        "vecSerialNumberDelta",
-                                        "mBomId",
-                                        "mPackageGroup",
-                                        "mCurrency2",
-                                        "mUnitPriceQuoted2",
-                                        "mStockReqId",
-                                        "taxCode",
-                                        "taxType",
-                                        "taxRate",
-                                        "taxAmt",
-                                        "taxAmt2",
-                                        "mUnitPriceRecommended2",
-                                        "taxOption",
-                                        "uom",
-                                        "uomRatio",
-                                        "date_expected_delivery",
-                                        "codeProject",
-                                        "codeDepartment",
-                                        "vecLabels",
-                                        "label_id",
-                                        "remoteStatus",
-                                        "unitDiscount",
-                                        "unitDiscount2",
-                                        "vecDiscountElement"
-                                    ],
-                                    "type": "object"
-                                },
-                                "type": "array"
-                            },
-                            "whtFilingCycle": {
-                                "type": "string"
-                            },
-                            "whtFilingDate": {
-                                "type": "string"
-                            },
-                            "whtTaxAmount": {
-                                "type": "integer"
-                            },
-                            "whtTaxBalance": {
-                                "type": "integer"
-                            },
-                            "whtTaxCode": {
-                                "type": "string"
-                            },
-                            "whtTaxRate": {
-                                "type": "integer"
-                            },
-                            "whtTaxType": {
-                                "type": "string"
+                            "inputs": {
+                                "body": "Purchase Order successfully received and queued for processing.",
+                                "statusCode": 200
                             }
                         },
-                        "type": "object"
-                    }
-                },
-                "kind": "Http",
-                "type": "Request"
-            }
-        }
-		
-          
-		  
-        }
-      }
+                        "Send_message": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": {
+                                    "ContentData": "@{base64(triggerBody())}"
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['servicebus']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/@{encodeURIComponent(encodeURIComponent('orders'))}/messages",
+                                "queries": {
+                                    "systemProperties": "None"
+                                }
+                            }
+                        }
+                    },
+                    "runAfter": {},
+                    "else": {
+                        "actions": {
+                            "Response": {
+                                "runAfter": {},
+                                "type": "Response",
+                                "kind": "Http",
+                                "inputs": {
+                                    "body": "Invalid Order: mApproverId=@{triggerBody()?['mApproverId']}",
+                                    "headers": {
+                                        "Content-Type": "application/json"
+                                    },
+                                    "statusCode": 200
+                                }
+                            }
+                        }
+                    },
+                    "expression": {
+                        "and": [
+                            {
+                                "equals": [
+                                    "@triggerBody()?['mApproverId']",
+                                    500
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "If"
+                }
+            },
+            "outputs": {}
     }
+	}
+	}
   ]
 }
