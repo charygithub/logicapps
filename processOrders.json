@@ -1,12 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "parameters": {
-    }
-  },
-  "variables": {
-    
-  },
   "resources": [
     {
       "type": "Microsoft.Logic/workflows",
@@ -14,14 +8,20 @@
       "name": "receiveOrders",
       "location": "eastus",
       "tags": {
-        "displayName": "receiveOrders"
+        "displayName": "LogicApp"
       },
       "properties": {
         "definition": {
           "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
           "contentVersion": "1.0.0.0",
-          {
-        "actions": {
+          "outputs": {},
+		  "parameters": {
+				"$connections": {
+					"defaultValue": {},
+					"type": "Object"
+				}
+			},
+		  "actions": {
             "Condition": {
                 "actions": {
                     "Response_2": {
@@ -87,14 +87,7 @@
                 "type": "If"
             }
         },
-        "outputs": {},
-        "parameters": {
-            "$connections": {
-                "defaultValue": {},
-                "type": "Object"
-            }
-        },
-        "triggers": {
+          "triggers": {
             "manual": {
                 "inputs": {
                     "method": "POST",
@@ -619,9 +612,8 @@
                 "kind": "Http",
                 "type": "Request"
             }
-        }
-    },
-    "parameters": {
+        },
+          "parameters": {
         "$connections": {
             "value": {
                 "servicebus": {
@@ -632,7 +624,7 @@
             }
         }
     }
-}
+		  
         }
       }
     }
